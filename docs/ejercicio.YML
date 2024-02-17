@@ -1,0 +1,26 @@
+
+Resourse:
+  TemplateTest: 
+    Type: AWS::EC2::Instances
+    Properties:
+      AvailabilityZone: us-east-id
+      ImageId: ami-0c652d1e2f35123ed
+      InstanceType: t2.micro
+      SecurityGroups: 
+      - !Ref ServerSecurityGroup
+
+  ServerSecurityGroup: 
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: allow conections from specified CIDR ranges
+      SecurityGroupsIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIP: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIP: 0.0.0.0/0
+
